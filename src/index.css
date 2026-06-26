@@ -270,38 +270,35 @@ button, input, select, textarea {
 .onboarding-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(12px);
-  display: grid;
-  place-items: center;
+  background-color: var(--bg-card);
   z-index: 100;
-  padding: 40px 24px;
   overflow-y: auto;
+  display: block;
 }
 
 .onboarding-card {
   background-color: var(--bg-card);
-  border-radius: var(--radius-lg);
-  max-width: 650px;
+  max-width: 100%;
   width: 100%;
-  box-shadow: var(--shadow-lg), var(--shadow-glow-primary);
-  overflow: hidden;
-  animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  margin: auto;
+  min-height: 100vh;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Premium Welcome Screen Styling */
 .welcome-screen-card {
   background-color: var(--bg-card);
-  border-radius: var(--radius-lg);
-  max-width: 750px;
+  max-width: 100%;
   width: 100%;
-  box-shadow: var(--shadow-lg), var(--shadow-glow-primary);
-  overflow: hidden;
-  animation: modalFadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  margin: auto;
+  min-height: 100vh;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
 }
@@ -309,12 +306,13 @@ button, input, select, textarea {
 .welcome-screen-header {
   background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-dark) 100%);
   color: white;
-  padding: 48px 40px;
+  padding: 80px 24px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  width: 100%;
 }
 
 .welcome-logo-glow {
@@ -358,7 +356,11 @@ button, input, select, textarea {
 }
 
 .welcome-screen-body {
-  padding: 40px;
+  padding: 60px 24px;
+  flex: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .welcome-intro-text {
@@ -463,8 +465,16 @@ button, input, select, textarea {
 .onboarding-header {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
-  padding: 40px;
+  padding: 48px 24px;
   position: relative;
+  text-align: center;
+}
+
+.onboarding-header-content {
+  max-width: 650px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .onboarding-header h2 {
@@ -504,7 +514,11 @@ button, input, select, textarea {
 }
 
 .onboarding-body {
-  padding: 40px;
+  padding: 60px 24px;
+  flex: 1;
+  max-width: 650px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .form-group {
@@ -584,11 +598,20 @@ button, input, select, textarea {
 }
 
 .onboarding-footer {
-  padding: 28px 40px;
+  padding: 32px 24px;
   border-top: 1px solid var(--border-color);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   background-color: var(--bg-app);
+  width: 100%;
+}
+
+.onboarding-footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 650px;
+  width: 100%;
 }
 
 /* Premium Buttons */

@@ -87,13 +87,15 @@ export default function Onboarding({ onComplete }) {
       <div className="onboarding-card">
         
         <div className="onboarding-header">
-          <h2>Create your Scholar Profile</h2>
-          <p>We use your background to match you with Indian central schemes, state DBTs, and private corporate scholarships.</p>
-          
-          <div className="progress-steps-bar">
-            <div className={`step-indicator ${step >= 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`}></div>
-            <div className={`step-indicator ${step >= 2 ? 'active' : ''} ${step > 2 ? 'completed' : ''}`}></div>
-            <div className={`step-indicator ${step >= 3 ? 'active' : ''}`}></div>
+          <div className="onboarding-header-content">
+            <h2>Create your Scholar Profile</h2>
+            <p>We use your background to match you with Indian central schemes, state DBTs, and private corporate scholarships.</p>
+            
+            <div className="progress-steps-bar">
+              <div className={`step-indicator ${step >= 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`}></div>
+              <div className={`step-indicator ${step >= 2 ? 'active' : ''} ${step > 2 ? 'completed' : ''}`}></div>
+              <div className={`step-indicator ${step >= 3 ? 'active' : ''}`}></div>
+            </div>
           </div>
         </div>
 
@@ -254,23 +256,25 @@ export default function Onboarding({ onComplete }) {
         </div>
 
         <div className="onboarding-footer">
-          {step > 1 ? (
-            <button className="btn-secondary" onClick={prevStep}>
-              Back
-            </button>
-          ) : (
-            <div />
-          )}
+          <div className="onboarding-footer-content">
+            {step > 1 ? (
+              <button className="btn-secondary" onClick={prevStep}>
+                Back
+              </button>
+            ) : (
+              <div />
+            )}
 
-          <button
-            className="btn-primary"
-            onClick={nextStep}
-            disabled={!isStepValid()}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-          >
-            {step === 3 ? 'Match Scholarships' : 'Continue'} 
-            <ArrowRight size={16} />
-          </button>
+            <button
+              className="btn-primary"
+              onClick={nextStep}
+              disabled={!isStepValid()}
+              style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              {step === 3 ? 'Match Scholarships' : 'Continue'} 
+              <ArrowRight size={16} />
+            </button>
+          </div>
         </div>
 
       </div>
