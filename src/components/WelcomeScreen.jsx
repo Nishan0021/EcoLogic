@@ -26,8 +26,18 @@ export default function WelcomeScreen({ onStart }) {
   ];
 
   return (
-    <div className="onboarding-backdrop">
-      <div className="welcome-screen-card">
+    <div className="onboarding-backdrop" style={{ position: 'relative' }}>
+      
+      {/* Animated Video Background */}
+      <div className="welcome-bg-video-wrapper">
+        <div className="welcome-bg-overlay"></div>
+        <video autoPlay loop muted playsInline className="welcome-bg-video">
+          <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c054ab23f2d96c9c647b9bf4b14d2e1b&profile_id=139&oauth2_token_id=57447761" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-curious-students-working-together-in-the-campus-41604-large.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div className="welcome-screen-card" style={{ zIndex: 10, position: 'relative' }}>
         <div className="welcome-screen-header">
           <div className="welcome-logo-glow">
             <GraduationCap size={44} color="white" />
