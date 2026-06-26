@@ -49,7 +49,8 @@ export const SCHOLARSHIPS = [
       }
     ],
     details: "The Post-Matric Scholarship for Scheduled Caste students is designed to reduce student dropout rates after Class 10 by covering full compulsory course fees, book allowances, and monthly stipends.",
-    essayPrompt: "Write a short personal statement detailing how this scholarship will enable you to continue your higher education, and describing any community service activities you plan to join during college."
+    essayPrompt: "Write a short personal statement detailing how this scholarship will enable you to continue your higher education, and describing any community service activities you plan to join during college.",
+    officialUrl: "https://scholarships.gov.in"
   },
   {
     id: "pragati-girls",
@@ -94,7 +95,8 @@ export const SCHOLARSHIPS = [
       }
     ],
     details: "Pragati is a key government fellowship providing ₹50,000 per annum to young women. The funds can be utilized to cover college tuition fees, purchasing computers, laptops, books, or paying hostel accommodation charges.",
-    essayPrompt: "Describe why you selected a technical field (STEM) for your career and how this fellowship will help you break barriers as a woman in engineering or technology."
+    essayPrompt: "Describe why you selected a technical field (STEM) for your career and how this fellowship will help you break barriers as a woman in engineering or technology.",
+    officialUrl: "https://scholarships.gov.in"
   },
   {
     id: "hdfc-badhte-kadam",
@@ -138,7 +140,8 @@ export const SCHOLARSHIPS = [
       }
     ],
     details: "HDFC Badhte Kadam scholarship supports students who are going through financial distress (e.g. loss of earning parent, medical crisis). First-generation college students are highly preferred during shortlisting.",
-    essayPrompt: "Describe any personal or financial crisis your family has experienced and how you have shown resilience to continue your education."
+    essayPrompt: "Describe any personal or financial crisis your family has experienced and how you have shown resilience to continue your education.",
+    officialUrl: "https://www.buddy4study.com/page/hdfc-bank-scholarship"
   },
   {
     id: "kotak-kanya",
@@ -183,7 +186,8 @@ export const SCHOLARSHIPS = [
       }
     ],
     details: "The Kotak Kanya Scholarship funds professional degree courses like engineering, medicine, law, design, or architecture. It provides ₹75,000 annually until graduation, covering tuition, books, and laptops.",
-    essayPrompt: "Share your professional goals. Why did you choose this career track, and how do you intend to give back to other first-generation girl students in your community?"
+    essayPrompt: "Share your professional goals. Why did you choose this career track, and how do you intend to give back to other first-generation girl students in your community?",
+    officialUrl: "https://kotakeducation.org/kotak-kanya-scholarship/"
   },
   {
     id: "tata-pankh",
@@ -227,7 +231,8 @@ export const SCHOLARSHIPS = [
       }
     ],
     details: "The Tata Capital Pankh Scholarship aims to support the educational expenses of students from lower-income backgrounds. It covers up to 80% of their college tuition fees.",
-    essayPrompt: "Describe how you managed your education so far despite financial limitations, and what role your parents played in keeping you motivated."
+    essayPrompt: "Describe how you managed your education so far despite financial limitations, and what role your parents played in keeping you motivated.",
+    officialUrl: "https://www.buddy4study.com/page/tata-capital-pankh-scholarship"
   },
   {
     id: "loreal-science",
@@ -272,7 +277,8 @@ export const SCHOLARSHIPS = [
       }
     ],
     details: "L'Oréal India provides this scholarship to young girls who want to study pure sciences, engineering, or medical sciences. The award provides ₹85,000 per year, covering total tuition and lab fees.",
-    essayPrompt: "Select a scientific topic or problem you want to research in the future, and explain why you want to devote your career to solving it."
+    essayPrompt: "Select a scientific topic or problem you want to research in the future, and explain why you want to devote your career to solving it.",
+    officialUrl: "https://www.buddy4study.com/page/loreal-india-for-young-women-in-science-scholarship"
   }
 ];
 

@@ -227,6 +227,46 @@ export default function ScholarshipDetail({
                 </p>
               </div>
 
+              {scholarship.officialUrl && (
+                <div className="official-portal-card" style={{ 
+                  marginBottom: '28px', 
+                  padding: '16px 20px', 
+                  backgroundColor: 'var(--primary-light)', 
+                  border: '1.5px dashed var(--border-focus)',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '16px'
+                }}>
+                  <div style={{ flex: 1 }}>
+                    <h5 style={{ fontSize: '14px', color: 'var(--primary-dark)', fontWeight: '700', marginBottom: '4px' }}>Official Application Platform</h5>
+                    <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: 0 }}>
+                      Submit your application directly on the provider's official website.
+                    </p>
+                  </div>
+                  <a 
+                    href={scholarship.officialUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="btn-primary"
+                    style={{ 
+                      textDecoration: 'none', 
+                      fontSize: '13px', 
+                      padding: '10px 18px', 
+                      whiteSpace: 'nowrap',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      borderRadius: '8px',
+                      fontWeight: '600'
+                    }}
+                  >
+                    Apply Now ↗
+                  </a>
+                </div>
+              )}
+
               <div style={{ display: 'flex', gap: '16px' }}>
                 {status === 'Not Started' ? (
                   <button 
