@@ -4,18 +4,18 @@
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Premium Indian EdTech Theme Palette */
-  --primary: #4338ca; /* Indigo-700 */
-  --primary-light: #e0e7ff; /* Indigo-100 */
-  --primary-dark: #312e81; /* Indigo-900 */
-  --primary-glow: rgba(67, 56, 202, 0.2);
+  /* Premium Brand Palette - White, Light Blue & Green */
+  --primary: #0284c7; /* Brand Sky Blue-600 */
+  --primary-light: #e0f2fe; /* Sky-100 */
+  --primary-dark: #0369a1; /* Sky-700 */
+  --primary-glow: rgba(2, 132, 199, 0.15);
   
-  --secondary: #0ea5e9; /* Sky-500 */
-  --secondary-light: #e0f2fe; /* Sky-100 */
+  --secondary: #10b981; /* Success Green-500 */
+  --secondary-light: #d1fae5; /* Green-100 */
   
-  --accent: #f97316; /* Saffron Orange-500 */
-  --accent-light: #ffedd5; /* Orange-100 */
-  --accent-dark: #c2410c; /* Orange-700 */
+  --accent: #22c55e; /* Accent Green-500 */
+  --accent-light: #f0fdf4; /* Green-50 */
+  --accent-dark: #15803d; /* Green-700 */
   
   --success: #10b981; /* Emerald-500 */
   --success-light: #d1fae5; /* Emerald-100 */
@@ -38,7 +38,7 @@
   --text-muted: #94a3b8;
   
   --border-color: #e2e8f0;
-  --border-focus: #a5b4fc;
+  --border-focus: #7dd3fc;
   
   /* Layout */
   --sidebar-width: 260px;
@@ -216,7 +216,7 @@ button, input, select, textarea {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #818cf8, #4f46e5);
+  background: linear-gradient(135deg, #0ea5e9, #10b981);
   color: white;
   display: flex;
   align-items: center;
@@ -2316,5 +2316,53 @@ button, input, select, textarea {
   
   .btn-card-secondary {
     width: 100%;
+  }
+}
+
+/* =========================================
+   Welcome Screen — Video Background Layer
+   ========================================= */
+.welcome-video-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.welcome-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+/* Tints the video toward the brand palette and keeps text readable */
+.welcome-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(240, 249, 255, 0.75),
+    rgba(224, 242, 254, 0.7),
+    rgba(255, 255, 255, 0.85)
+  );
+  background-size: 400% 400%;
+  animation: gradientBgMove 8s ease infinite;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .welcome-bg-video {
+    display: none;
+  }
+  .welcome-video-overlay {
+    animation: none;
+    background: linear-gradient(-45deg, #ffffff, #f0f9ff, #e0f2fe, #ffffff);
   }
 }

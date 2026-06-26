@@ -27,8 +27,23 @@ export default function WelcomeScreen({ onStart }) {
 
   return (
     <div className="onboarding-backdrop welcome-screen-bg">
+      {/* Video background layer */}
+      <div className="welcome-video-wrapper">
+        <video
+          className="welcome-bg-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/assets/welcome-poster.jpg"
+        >
+          <source src="/assets/welcome-bg.mp4" type="video/mp4" />
+        </video>
+        <div className="welcome-video-overlay"></div>
+      </div>
+
       <div className="welcome-bg-container">
-        {/* Animated Floating Background Shapes */}
+        {/* Floating Light Blue Bubbles (now layered above the video) */}
         <div className="floating-bubble bubble-1"></div>
         <div className="floating-bubble bubble-2"></div>
         <div className="floating-bubble bubble-3"></div>
@@ -57,14 +72,14 @@ export default function WelcomeScreen({ onStart }) {
 
         <div className="welcome-screen-body">
           <p className="welcome-intro-text animate-fade-in-up-delayed-2">
-            Paving the path to higher education can be confusing when you are doing it for the first time in your family. 
+            Paving the path to higher education can be confusing when you are doing it for the first time in your family.
             We are here to explain the rules, organize your documents, and guide you through every application step.
           </p>
 
           <div className="welcome-features-grid">
             {highlights.map((item, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className={`welcome-feature-card animate-cascade-${idx + 1}`}
               >
                 <div className="welcome-feature-icon-wrapper">
