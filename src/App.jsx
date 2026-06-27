@@ -704,14 +704,6 @@ export default function App() {
                 <FolderLock size={18} /> {t('vault')}
               </button>
             </li>
-            <li>
-              <button 
-                className={`nav-link-btn ${activeTab === 'ecolabs' ? 'active' : ''}`}
-                onClick={() => handleNavigate('ecolabs')}
-              >
-                <Beaker size={18} /> EcoLabs (Beta)
-              </button>
-            </li>
           </ul>
         </nav>
 
