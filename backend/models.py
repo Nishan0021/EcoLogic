@@ -30,7 +30,7 @@ class Student(Base):
 class Scholarship(Base):
     __tablename__ = "scholarships"
 
-    id = Column(String, primary_key=True)  # e.g., 'nsp-post-matric-sc'
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))  # primary key with auto UUID
     title = Column(String, nullable=False)
     provider = Column(String, nullable=True)
     description = Column(String, nullable=True)
