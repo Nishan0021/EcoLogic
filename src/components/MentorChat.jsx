@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send } from 'lucide-react';
 import { MOCK_MENTOR_CHAT } from '../data';
+import { api } from '../services/api';
 
-export default function MentorChat({ messages, onSendMessage }) {
+export default function MentorChat({ studentId, messages, onSendMessage }) {
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const chatEndRef = useRef(null);
@@ -23,7 +24,7 @@ export default function MentorChat({ messages, onSendMessage }) {
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSend = (textToSend) => {
+  const handleSend = async (textToSend) => {
     if (!textToSend.trim()) return;
 
     // Send user message
@@ -34,37 +35,48 @@ export default function MentorChat({ messages, onSendMessage }) {
     });
     
     setInputText('');
-
-    // Trigger mock response after a small delay
     setIsTyping(true);
-    setTimeout(() => {
+
+    try {
+      const response = await api.askChatbot(studentId, textToSend);
       setIsTyping(false);
-      
-      const lowerText = textToSend.toLowerCase();
-      let reply = "That is a great query! Navigating government portals and revenue offices can be confusing, but you're doing an amazing job. Tell me more, or check the Resource Center for definitions!";
-
-      if (lowerText.includes('essay') || lowerText.includes('draft') || lowerText.includes('review')) {
-        if (textToSend.split(/\s+/).length > 20) {
-          reply = "Wow, what a powerful draft! I love how you shared your personal story and family motivation. To make it even stronger: 1. Clearly explain how the scholarship funds will cover your B.Tech/B.Sc expenses (like fees or hostel). 2. Make sure to double check that you mention your goals for helping your community. This is an excellent draft!";
-        } else {
-          reply = "I would be happy to review your scholarship statement! Please paste your draft essay here. I'll read it and give you suggestions on structure, opening hook, and wording.";
-        }
-      } else if (lowerText.includes('income') || lowerText.includes('tehsildar') || lowerText.includes('certificate')) {
-        reply = "To get an official Income Certificate, you must apply through your state's online portal (like Mahaonline in Maharashtra, e-District in Delhi/UP, Seva Sindhu in Karnataka) or visit your nearest Maha e-Seva Kendra / Common Service Centre (CSC). You will need your parents' Aadhaar card, ration card, land record details, or a salary declaration signed by the local Panchayat head/Tahsildar.";
-      } else if (lowerText.includes('aadhaar') || lowerText.includes('seeding') || lowerText.includes('link') || lowerText.includes('dbt')) {
-        reply = "Aadhaar Seeding links your bank account to your 12-digit Aadhaar card so that DBT (Direct Benefit Transfer) funds arrive securely. To do this, download the 'Aadhaar Seeding Form', fill it out, and submit it at your bank branch. Ask them to verify it on their NPCI mapper portal. You can check the status on the UIDAI portal under 'Aadhaar Bank Seeding Status'.";
-      } else if (lowerText.includes('bonafide') || lowerText.includes('stamp') || lowerText.includes('college')) {
-        reply = "A Bonafide Certificate is issued by your college administrative department. Write a simple request letter (we have a copy-paste template in the Resource Center!), attach your college ID and admission fee receipt, and submit it at the clerk's counter. It usually takes 2-3 working days to get signed by the Principal/Registrar.";
-      } else if (lowerText.includes('nsp') || lowerText.includes('portal') || lowerText.includes('national')) {
-        reply = "The National Scholarship Portal (NSP) is the central government portal. You need to register as a 'New Student', input your details (Aadhaar, bank IFSC, domicile), and select the scheme you qualify for. Make sure to double check your bank details—an error there can stop your scholarship payments!";
-      }
-
       onSendMessage({
         sender: 'mentor',
         time: new Date().toISOString(),
-        text: reply
+        text: response.reply
       });
-    }, 1200);
+    } catch (err) {
+      console.error("FastAPI Chatbot query failed, falling back to local heuristics", err);
+      // Trigger mock response after a small delay
+      setTimeout(() => {
+        setIsTyping(false);
+        
+        const lowerText = textToSend.toLowerCase();
+        let reply = "That is a great query! Navigating government portals and revenue offices can be confusing, but you're doing an amazing job. Tell me more, or check the Resource Center for definitions!";
+
+        if (lowerText.includes('essay') || lowerText.includes('draft') || lowerText.includes('review')) {
+          if (textToSend.split(/\s+/).length > 20) {
+            reply = "Wow, what a powerful draft! I love how you shared your personal story and family motivation. To make it even stronger: 1. Clearly explain how the scholarship funds will cover your B.Tech/B.Sc expenses (like fees or hostel). 2. Make sure to double check that you mention your goals for helping your community. This is an excellent draft!";
+          } else {
+            reply = "I would be happy to review your scholarship statement! Please paste your draft essay here. I'll read it and give you suggestions on structure, opening hook, and wording.";
+          }
+        } else if (lowerText.includes('income') || lowerText.includes('tehsildar') || lowerText.includes('certificate')) {
+          reply = "To get an official Income Certificate, you must apply through your state's online portal (like Mahaonline in Maharashtra, e-District in Delhi/UP, Seva Sindhu in Karnataka) or visit your nearest Maha e-Seva Kendra / Common Service Centre (CSC). You will need your parents' Aadhaar card, ration card, land record details, or a salary declaration signed by the local Panchayat head/Tahsildar.";
+        } else if (lowerText.includes('aadhaar') || lowerText.includes('seeding') || lowerText.includes('link') || lowerText.includes('dbt')) {
+          reply = "Aadhaar Seeding links your bank account to your 12-digit Aadhaar card so that DBT (Direct Benefit Transfer) funds arrive securely. To do this, download the 'Aadhaar Seeding Form', fill it out, and submit it at your bank branch. Ask them to verify it on their NPCI mapper portal. You can check the status on the UIDAI portal under 'Aadhaar Bank Seeding Status'.";
+        } else if (lowerText.includes('bonafide') || lowerText.includes('stamp') || lowerText.includes('college')) {
+          reply = "A Bonafide Certificate is issued by your college administrative department. Write a simple request letter (we have a copy-paste template in the Resource Center!), attach your college ID and admission fee receipt, and submit it at the clerk's counter. It usually takes 2-3 working days to get signed by the Principal/Registrar.";
+        } else if (lowerText.includes('nsp') || lowerText.includes('portal') || lowerText.includes('national')) {
+          reply = "The National Scholarship Portal (NSP) is the central government portal. You need to register as a 'New Student', input your details (Aadhaar, bank IFSC, domicile), and select the scheme you qualify for. Make sure to double check your bank details—an error there can stop your scholarship payments!";
+        }
+
+        onSendMessage({
+          sender: 'mentor',
+          time: new Date().toISOString(),
+          text: reply
+        });
+      }, 1000);
+    }
   };
 
   const handleKeyPress = (e) => {

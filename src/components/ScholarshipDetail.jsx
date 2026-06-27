@@ -10,7 +10,8 @@ export default function ScholarshipDetail({
   onSaveEssay, 
   onSubmitApplication, 
   onClose,
-  onOpenGlossaryTerm 
+  onOpenGlossaryTerm,
+  onOpenInAppBrowser
 }) {
   const [activeTab, setActiveTab] = useState('eligibility');
   const [essayText, setEssayText] = useState(application?.essay || '');
@@ -245,25 +246,46 @@ export default function ScholarshipDetail({
                       Submit your application directly on the provider's official website.
                     </p>
                   </div>
-                  <a 
-                    href={scholarship.officialUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="btn-primary"
-                    style={{ 
-                      textDecoration: 'none', 
-                      fontSize: '13px', 
-                      padding: '10px 18px', 
-                      whiteSpace: 'nowrap',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                      borderRadius: '8px',
-                      fontWeight: '600'
-                    }}
-                  >
-                    Apply Now ↗
-                  </a>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    <button 
+                      onClick={() => onOpenInAppBrowser(scholarship.id)}
+                      className="btn-primary"
+                      style={{ 
+                        fontSize: '13px', 
+                        padding: '10px 14px', 
+                        whiteSpace: 'nowrap',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        borderRadius: '8px',
+                        fontWeight: '600',
+                        border: 'none',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Apply via EcoVault (Autofill) ⚡
+                    </button>
+                    <a
+                      href={scholarship.officialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-secondary"
+                      style={{
+                        fontSize: '13px',
+                        padding: '10px 14px',
+                        whiteSpace: 'nowrap',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        borderRadius: '8px',
+                        fontWeight: '600',
+                        textDecoration: 'none',
+                        textAlign: 'center'
+                      }}
+                    >
+                      Apply Manually ↗
+                    </a>
+                  </div>
                 </div>
               )}
 
