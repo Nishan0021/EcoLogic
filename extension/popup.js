@@ -46,6 +46,19 @@ async function syncProfile() {
     }
     
     const data = await res.json();
+
+    // 4. Fetch uploaded documents
+    let docs = [];
+    try {
+      const docsRes = await fetch(`${API_BASE}/documents`, {
+        headers: { 'X-Student-Id': studentId }
+      });
+      if (docsRes.ok) {
+        docs = await docsRes.json();
+      }
+    } catch (e) {
+      console.warn("Failed to load documents", e);
+    }
     
     // Map details
     activeProfile = {
@@ -56,7 +69,12 @@ async function syncProfile() {
       income: data.annual_family_income ? `₹${Math.round(data.annual_family_income).toLocaleString('en-IN')}` : '-',
       score: String(data.score),
       phone: data.phone,
-      email: data.email
+      email: data.email,
+      vaultDocs: docs.map(d => ({
+        type: d.doc_type,
+        // Extract filename from file_url path (e.g. uploads/student_id_doc_type_id.pdf)
+        filename: d.file_url.split(/[/\\]/).pop()
+      }))
     };
     
     // Update UI

@@ -4,6 +4,7 @@ import uuid
 from datetime import date, datetime
 from typing import List, Optional
 from fastapi import FastAPI, Depends, HTTPException, Header, UploadFile, File, Form
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
@@ -27,6 +28,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.mount("/uploads", StaticFiles(directory="./uploads"), name="uploads")
 
 # Run seeder on startup
 @app.on_event("startup")
