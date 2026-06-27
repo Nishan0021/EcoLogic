@@ -40,7 +40,7 @@ def crawl_scholarships():
                     "provider": "Aggregated via Buddy4Study",
                     "description": f"Live scholarship listing scraped from Buddy4Study for {clean_title}.",
                     "amount": 25000 + (idx * 5000),
-                    "deadline": "2026-11-30",
+                    "deadline": date.fromisoformat("2026-11-30"),
                     "eligibility_criteria": {
                         "gpaMin": 6.0,
                         "incomeMax": 450000,
@@ -85,7 +85,7 @@ def crawl_scholarships():
                 "provider": "HDFC Bank Ltd. (Buddy4Study Partner)",
                 "description": "To support meritorious and needy students belonging to underprivileged sections of society. Covers school, UG, PG, and diploma courses.",
                 "amount": 75000,
-                "deadline": "2026-09-30",
+                "deadline": date.fromisoformat("2026-09-30"),
                 "eligibility_criteria": {
                     "gpaMin": 6.0,
                     "incomeMax": 600000,
@@ -122,8 +122,17 @@ def crawl_scholarships():
     db: Session = SessionLocal()
     try:
         for entry in scraped_data:
-            db_obj = models.Scholarship(**entry)
-            db.merge(db_obj)
+            # Check for existing scholarship by title and provider to avoid duplicates
+            existing = db.query(models.Scholarship).filter_by(title=entry.get('title'), provider=entry.get('provider')).first()
+            if existing:
+                # Update mutable fields (skip id to keep original)
+                for key, value in entry.items():
+                    if key != 'id':
+                        setattr(existing, key, value)
+                db.add(existing)
+            else:
+                db_obj = models.Scholarship(**entry)
+                db.add(db_obj)
         db.commit()
     finally:
         db.close()

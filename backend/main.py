@@ -53,8 +53,9 @@ def startup_event():
 @app.post("/crawl")
 def trigger_crawl():
     try:
-        crawler.crawl_scholarships()
-        return {"status": "Crawler executed"}
+        data = crawler.crawl_scholarships()
+        new_count = len(data) if isinstance(data, list) else 0
+        return {"status": "success", "new_scholarships": new_count}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Crawler error: {e}")
 
