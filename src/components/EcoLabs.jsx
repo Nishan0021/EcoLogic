@@ -51,7 +51,7 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
   // Check Voice Support
   useEffect(() => {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      voiceSupported(true);
+      setVoiceSupported(true);
     }
   }, []);
 

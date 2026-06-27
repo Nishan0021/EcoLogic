@@ -521,3 +521,58 @@ def get_notifications(
     return db.query(models.Notification).filter(
         models.Notification.student_id == student.id
     ).order_by(models.Notification.sent_at.desc()).all()
+
+# --- Daily Scholarship Scanner (Simulated Background Task) ---
+import asyncio
+
+async def daily_scholarship_scanner():
+    """
+    Simulated crawler that runs every 24 hours to scan scholarship portals
+    (NSP, Buddy4Study, NGO, Private CSR foundations) and populate/update the DB.
+    """
+    # Wait for the app to initialize
+    await asyncio.sleep(5)
+    
+    while True:
+        print("[Crawler Scanner] Initiating daily internet portal crawl scanning...")
+        db = next(get_db())
+        try:
+            crawl_title = "Tata Trust First-Gen Engineering Fellowship"
+            existing = db.query(models.Scholarship).filter(models.Scholarship.title == crawl_title).first()
+            
+            if not existing:
+                print(f"[Crawler Scanner] Discovered new program: '{crawl_title}'. Anchoring to database...")
+                new_sch = models.Scholarship(
+                    title=crawl_title,
+                    provider="Tata Trusts Foundation",
+                    description="Special CSR grant for first-generation students pursuing undergraduate engineering courses in India.",
+                    amount=50000.00,
+                    deadline=date(2026, 9, 30),
+                    eligibility_criteria={
+                        "gpaMin": 8.0,
+                        "incomeMax": 350000.00,
+                        "casteRequired": ["General", "OBC", "SC", "ST", "EWS"],
+                        "firstGenOnly": True
+                    },
+                    required_documents=[
+                        {"id": "aadhaar", "name": "Aadhaar Card"},
+                        {"id": "income", "name": "Income Certificate"},
+                        {"id": "marksheet_12", "name": "Class 12 Marksheet"}
+                    ],
+                    application_link="https://www.tatatrusts.org"
+                )
+                db.add(new_sch)
+                db.commit()
+                print("[Crawler Scanner] Database updated successfully with newly crawled listings.")
+            else:
+                print("[Crawler Scanner] Portal sync complete. No new listings found today.")
+        except Exception as e:
+            print(f"[Crawler Scanner Error] failed to write crawled listings: {str(e)}")
+        
+        # Sleep for 24 hours
+        await asyncio.sleep(86400)
+
+@app.on_event("startup")
+async def startup_event():
+    # Start the daily scanner background task
+    asyncio.create_task(daily_scholarship_scanner())

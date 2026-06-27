@@ -2412,3 +2412,58 @@ button, input, select, textarea {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* =========================================
+   EcoLabs Beta Styles & EcoLite Mode
+   ========================================= */
+.ecolabs-container {
+  padding: 24px;
+}
+
+.roadmap-panel, .blockchain-panel, .voice-panel, .prediction-panel {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* EcoLite Low Bandwidth Accessibility Mode Styles */
+body.ecolite-mode {
+  background: #121214 !important;
+  color: #e2e2e8 !important;
+}
+
+body.ecolite-mode .sidebar {
+  background: #1a1a1e !important;
+  box-shadow: none !important;
+  border-right: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+body.ecolite-mode .main-panel {
+  background: #121214 !important;
+}
+
+body.ecolite-mode .dashboard-summary-card,
+body.ecolite-mode .document-card,
+body.ecolite-mode .scholarship-card {
+  background: #1e1e24 !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Spinner Keyframes */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Voice Assist Animations */
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+.mic-button.listening {
+  animation: pulseMic 1.2s infinite;
+}
+@keyframes pulseMic {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
