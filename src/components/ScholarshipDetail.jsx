@@ -64,7 +64,8 @@ export default function ScholarshipDetail({
   const progressPercent = totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0;
 
   return (
-    <div className="drawer-backdrop" onClick={onClose}>
+    <>
+      <div className="drawer-backdrop" onClick={onClose}>
       <div className="drawer-container" onClick={(e) => e.stopPropagation()}>
         
         <div className="drawer-header">
@@ -507,6 +508,6 @@ export default function ScholarshipDetail({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
