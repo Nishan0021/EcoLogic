@@ -8,7 +8,8 @@ import {
   IndianRupee,
   Search,
   Sparkles,
-  Star
+  Star,
+  RefreshCw
 } from 'lucide-react';
 
 const STATUS_TABS = [
@@ -85,7 +86,9 @@ export default function ScholarshipListing({
   scholarships,
   savedScholarships,
   onSaveToggle,
-  onOpenDetail
+  onOpenDetail,
+  onLoadNewScholarships,
+  isCrawling
 }) {
   const [search, setSearch] = useState('');
   const [statusTab, setStatusTab] = useState('all');
@@ -258,8 +261,24 @@ export default function ScholarshipListing({
       {/* Clean Header */}
       <div className="dashboard-header-clean">
         <div className="header-greeting">
-          <h2>Discover Scholarships</h2>
-          <p>Search and compare opportunities based on your academic profile, family income, and Category.</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <h2 style={{ margin: 0 }}>Discover Scholarships</h2>
+            {onLoadNewScholarships && (
+              <button
+                className="premium-button group flex items-center gap-2"
+                onClick={onLoadNewScholarships}
+                disabled={isCrawling}
+                style={{ padding: '6px 12px', fontSize: '12.5px', height: 'fit-content' }}
+              >
+                <RefreshCw 
+                  className={`w-4 h-4 transition-transform ${isCrawling ? '' : 'group-hover:rotate-180'}`} 
+                  style={isCrawling ? { animation: 'spin 1.5s linear infinite' } : {}}
+                />
+                {isCrawling ? 'Loading...' : 'Load New Scholarships'}
+              </button>
+            )}
+          </div>
+          <p style={{ marginTop: '4px' }}>Search and compare opportunities based on your academic profile, family income, and Category.</p>
         </div>
         <div className="discovery-stats-clean">
           <div className="discovery-stat-item">

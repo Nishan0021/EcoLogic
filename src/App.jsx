@@ -74,6 +74,7 @@ export default function App() {
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [extensionActive, setExtensionActive] = useState(false);
+  const [isCrawling, setIsCrawling] = useState(false);
 
   // Fetch all user details from the backend if studentId exists
   useEffect(() => {
@@ -259,19 +260,26 @@ export default function App() {
           };
         });
         setScholarships(normalized);
+      } else {
+        setScholarships(SCHOLARSHIPS);
       }
     } catch (err) {
       console.warn('Failed to fetch live scholarships, using local fallback:', err);
+      setScholarships(SCHOLARSHIPS);
     }
   };
 
   // Trigger manual crawl and reload scholarships
   const handleLoadNewScholarships = async () => {
+    setIsCrawling(true);
     try {
       await api.triggerCrawl();
       await fetchLiveScholarships();
+      window.location.reload();
     } catch (err) {
       console.error('Error loading new scholarships:', err);
+    } finally {
+      setIsCrawling(false);
     }
   };
 
@@ -847,24 +855,15 @@ export default function App() {
         )}
 
         {activeTab === 'scholarships' && (
-          <>
-            <div className="flex justify-center my-4">
-              <button
-                className="premium-button group flex items-center gap-2"
-                onClick={handleLoadNewScholarships}
-              >
-                <RefreshCw className="w-5 h-5 transition-transform group-hover:rotate-180" />
-                Load New Scholarships
-              </button>
-            </div>
-            <ScholarshipListing 
-              profile={profile}
-              scholarships={scholarships}
-              savedScholarships={savedScholarships}
-              onSaveToggle={handleSaveToggle}
-              onOpenDetail={setSelectedScholarshipId}
-            />
-          </>
+          <ScholarshipListing 
+            profile={profile}
+            scholarships={scholarships}
+            savedScholarships={savedScholarships}
+            onSaveToggle={handleSaveToggle}
+            onOpenDetail={setSelectedScholarshipId}
+            onLoadNewScholarships={handleLoadNewScholarships}
+            isCrawling={isCrawling}
+          />
         )}
 
         {activeTab === 'tracker' && (

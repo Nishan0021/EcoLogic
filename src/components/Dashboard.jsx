@@ -27,6 +27,18 @@ function getScholarshipStatus(scholarship) {
   return 'Live';
 }
 
+const LEVEL_MAP = {
+  class11:  'Class 11',
+  class12:  'Class 12',
+  diploma:  'Diploma',
+  ug1:      'Undergrad',
+  ug2:      'Undergrad',
+  ug3:      'Undergrad',
+  ug4:      'Undergrad',
+  pg1:      'Postgraduate',
+  pg2:      'Postgraduate',
+};
+
 export default function Dashboard({
   profile,
   scholarships,
@@ -65,8 +77,10 @@ export default function Dashboard({
       score -= 20;
     }
 
+    // Academic Level check — map onboarding ID to readable label first
+    const mappedLevel = LEVEL_MAP[profile.academicLevel] || profile.academicLevel;
     const levelMatch = criteria.academicLevel.some((lvl) =>
-      profile.academicLevel.includes(lvl.split(' ')[0])
+      mappedLevel.toLowerCase().includes(lvl.toLowerCase().split(' ')[0])
     );
 
     if (criteria.academicLevel && !levelMatch) {

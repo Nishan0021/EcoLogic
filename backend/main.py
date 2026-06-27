@@ -60,7 +60,7 @@ app.mount("/uploads", StaticFiles(directory="./uploads"), name="uploads")
 
 # Run crawler on startup
 @app.on_event("startup")
-def startup_event():
+async def startup_event():
     # Load .env file if it exists
     env_paths = [".env", "backend/.env", "../.env"]
     for path in env_paths:
@@ -74,6 +74,9 @@ def startup_event():
     
     db = next(get_db())
     try:
+        # Seed default scholarships
+        seed.seed_scholarships(db)
+        
         results = crawler.crawl_scholarships()
         saved = save_scholarships(results, db)
         print(f"[Startup] Saved {saved} new scholarships")
@@ -81,6 +84,9 @@ def startup_event():
         print(f"Startup crawler error: {e}")
     finally:
         db.close()
+
+    # Start the daily scanner background task
+    asyncio.create_task(daily_scholarship_scanner())
 
 @app.post("/crawl")
 def trigger_crawl():
@@ -814,7 +820,4 @@ async def daily_scholarship_scanner():
         # Sleep for 24 hours
         await asyncio.sleep(86400)
 
-@app.on_event("startup")
-async def startup_event():
-    # Start the daily scanner background task
-    asyncio.create_task(daily_scholarship_scanner())
+# Consolidated startup logic is defined above
