@@ -23,6 +23,7 @@ import WelcomeScreen from './components/WelcomeScreen';
 
 export default function App() {
   // --- Persistent State ---
+
   const [profile, setProfile] = useState(() => {
     const saved = localStorage.getItem('firstgen_profile');
     return saved ? JSON.parse(saved) : null;
@@ -302,7 +303,7 @@ export default function App() {
           </div>
           <button 
             onClick={handleResetApp} 
-            style={{ border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-secondary)' }}
+            style={{ border: 'none', background: 'none', cursor: 'pointer', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center' }}
             title="Log Out"
           >
             <LogOut size={16} />
