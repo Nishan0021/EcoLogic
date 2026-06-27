@@ -91,7 +91,7 @@ export default function Onboarding({ onComplete }) {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
+      background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -101,10 +101,10 @@ export default function Onboarding({ onComplete }) {
       <div style={{
         width: '100%',
         maxWidth: '560px',
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        background: '#ffffff',
+        border: '1px solid var(--border-color)',
         borderRadius: '20px',
-        backdropFilter: 'blur(20px)',
+        boxShadow: 'var(--shadow-lg)',
         overflow: 'hidden',
       }}>
 
@@ -144,13 +144,13 @@ export default function Onboarding({ onComplete }) {
           {/* STEP 1: Academic Level + Marks */}
           {step === 1 && (
             <div>
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
+              <p style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
                 Select your current academic level and enter your last examination marks.
               </p>
 
               {/* Academic Level Grid */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', color: '#e2e8f0', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
+                <label style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
                   Current Academic Level
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
@@ -161,8 +161,8 @@ export default function Onboarding({ onComplete }) {
                       style={{
                         padding: '0.65rem 0.75rem',
                         borderRadius: '10px',
-                        border: `1px solid ${formData.academicLevel === level.id ? 'var(--primary)' : 'rgba(255,255,255,0.08)'}`,
-                        background: formData.academicLevel === level.id ? 'var(--primary-glow)' : 'rgba(255,255,255,0.02)',
+                        border: `1px solid ${formData.academicLevel === level.id ? 'var(--primary)' : 'var(--border-color)'}`,
+                        background: formData.academicLevel === level.id ? 'var(--primary-glow)' : 'var(--bg-app)',
                         cursor: 'pointer',
                         transition: 'all 0.2s',
                         display: 'flex',
@@ -172,7 +172,7 @@ export default function Onboarding({ onComplete }) {
                     >
 
                       <div>
-                        <div style={{ color: formData.academicLevel === level.id ? 'var(--primary)' : '#e2e8f0', fontWeight: '600', fontSize: '0.8rem' }}>
+                        <div style={{ color: formData.academicLevel === level.id ? 'var(--primary)' : 'var(--text-primary)', fontWeight: '600', fontSize: '0.8rem' }}>
                           {level.label}
                         </div>
                         <div style={{ color: '#64748b', fontSize: '0.7rem' }}>{level.desc}</div>
@@ -187,7 +187,7 @@ export default function Onboarding({ onComplete }) {
 
               {/* Marks Input */}
               <div>
-                <label style={{ display: 'block', color: '#e2e8f0', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                <label style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                   Previous Exam Score
                 </label>
                 <div style={{ position: 'relative' }}>
@@ -203,9 +203,9 @@ export default function Onboarding({ onComplete }) {
                       width: '100%',
                       padding: '0.75rem 1rem',
                       borderRadius: '10px',
-                      border: `1px solid ${formData.score ? 'var(--primary)' : 'rgba(255,255,255,0.1)'}`,
-                      background: 'rgba(255,255,255,0.04)',
-                      color: '#fff',
+                      border: `1px solid ${formData.score ? 'var(--primary)' : 'var(--border-color)'}`,
+                      background: 'var(--bg-app)',
+                      color: 'var(--text-primary)',
                       fontSize: '1rem',
                       outline: 'none',
                       boxSizing: 'border-box',
@@ -222,13 +222,13 @@ export default function Onboarding({ onComplete }) {
           {/* STEP 2: Income + Category */}
           {step === 2 && (
             <div>
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
+              <p style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
                 This helps us find need-based government schemes and your reservation benefits.
               </p>
 
               {/* Income Ranges */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', color: '#e2e8f0', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
+                <label style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
                   Annual Family Income (Gross)
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
@@ -239,13 +239,13 @@ export default function Onboarding({ onComplete }) {
                       style={{
                         padding: '0.75rem',
                         borderRadius: '10px',
-                        border: `1px solid ${formData.income === range.value ? '#10b981' : 'rgba(255,255,255,0.08)'}`,
-                        background: formData.income === range.value ? 'rgba(16, 185, 129, 0.1)' : 'rgba(255,255,255,0.02)',
+                        border: `1px solid ${formData.income === range.value ? '#10b981' : 'var(--border-color)'}`,
+                        background: formData.income === range.value ? 'rgba(16, 185, 129, 0.1)' : 'var(--bg-app)',
                         cursor: 'pointer',
                         transition: 'all 0.2s',
                       }}
                     >
-                      <div style={{ color: formData.income === range.value ? '#10b981' : '#e2e8f0', fontWeight: '600', fontSize: '0.82rem' }}>
+                      <div style={{ color: formData.income === range.value ? '#10b981' : 'var(--text-primary)', fontWeight: '600', fontSize: '0.82rem' }}>
                         {range.label}
                       </div>
                       <div style={{ color: '#64748b', fontSize: '0.72rem', marginTop: '2px' }}>{range.sub}</div>
@@ -256,7 +256,7 @@ export default function Onboarding({ onComplete }) {
 
               {/* Social Category */}
               <div>
-                <label style={{ display: 'block', color: '#e2e8f0', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
+                <label style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
                   Social Category (Reservation / Caste Certificate)
                 </label>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -267,8 +267,8 @@ export default function Onboarding({ onComplete }) {
                       style={{
                         padding: '0.75rem 1rem',
                         borderRadius: '10px',
-                        border: `1px solid ${formData.category === cat.value ? cat.color : 'rgba(255,255,255,0.08)'}`,
-                        background: formData.category === cat.value ? `${cat.color}18` : 'rgba(255,255,255,0.02)',
+                        border: `1px solid ${formData.category === cat.value ? cat.color : 'var(--border-color)'}`,
+                        background: formData.category === cat.value ? `${cat.color}18` : 'var(--bg-app)',
                         cursor: 'pointer',
                         transition: 'all 0.2s',
                         display: 'flex',
@@ -285,7 +285,7 @@ export default function Onboarding({ onComplete }) {
                           fontSize: '0.72rem',
                           fontWeight: '700',
                         }}>{cat.label}</span>
-                        <span style={{ color: '#cbd5e1', fontSize: '0.83rem' }}>{cat.full}</span>
+                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.83rem' }}>{cat.full}</span>
                       </div>
                       {formData.category === cat.value && <Check size={16} color={cat.color} />}
                     </div>
@@ -298,13 +298,13 @@ export default function Onboarding({ onComplete }) {
           {/* STEP 3: State + Gender */}
           {step === 3 && (
             <div>
-              <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
+              <p style={{ color: '#64748b', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
                 State-specific DBT schemes and gender-based scholarships like Pragati, Saksham, and Vigyan Jyoti will be matched.
               </p>
 
               {/* State */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', color: '#e2e8f0', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem' }}>
+                <label style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.5rem' }}>
                   Home State (Domicile / Native State)
                 </label>
                 <select
@@ -314,9 +314,9 @@ export default function Onboarding({ onComplete }) {
                     width: '100%',
                     padding: '0.75rem 1rem',
                     borderRadius: '10px',
-                    border: `1px solid ${formData.state ? 'var(--primary)' : 'rgba(255,255,255,0.1)'}`,
-                    background: 'rgba(15,23,42,0.8)',
-                    color: '#e2e8f0',
+                    border: `1px solid ${formData.state ? 'var(--primary)' : 'var(--border-color)'}`,
+                    background: 'var(--bg-app)',
+                    color: 'var(--text-primary)',
                     fontSize: '0.9rem',
                     outline: 'none',
                   }}
@@ -330,7 +330,7 @@ export default function Onboarding({ onComplete }) {
 
               {/* Gender */}
               <div style={{ marginBottom: '1.5rem' }}>
-                <label style={{ display: 'block', color: '#e2e8f0', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
+                <label style={{ display: 'block', color: 'var(--text-primary)', fontSize: '0.85rem', fontWeight: '600', marginBottom: '0.75rem' }}>
                   Gender
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem' }}>
@@ -341,11 +341,11 @@ export default function Onboarding({ onComplete }) {
                       style={{
                         padding: '0.75rem',
                         borderRadius: '10px',
-                        border: `1px solid ${formData.gender === g ? 'var(--primary)' : 'rgba(255,255,255,0.08)'}`,
-                        background: formData.gender === g ? 'var(--primary-glow)' : 'rgba(255,255,255,0.02)',
+                        border: `1px solid ${formData.gender === g ? 'var(--primary)' : 'var(--border-color)'}`,
+                        background: formData.gender === g ? 'var(--primary-glow)' : 'var(--bg-app)',
                         cursor: 'pointer',
                         textAlign: 'center',
-                        color: formData.gender === g ? 'var(--primary)' : '#94a3b8',
+                        color: formData.gender === g ? 'var(--primary)' : 'var(--text-secondary)',
                         fontWeight: '600',
                         fontSize: '0.85rem',
                         transition: 'all 0.2s',
@@ -373,7 +373,7 @@ export default function Onboarding({ onComplete }) {
                     <div style={{ color: '#10b981', fontWeight: '700', fontSize: '1rem' }}>
                       ~{estimatedMatches()} Scholarships Found!
                     </div>
-                    <div style={{ color: '#94a3b8', fontSize: '0.78rem' }}>
+                    <div style={{ color: '#64748b', fontSize: '0.78rem' }}>
                       Tap "Show My Scholarships" to see your personalized list.
                     </div>
                   </div>
@@ -389,15 +389,15 @@ export default function Onboarding({ onComplete }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderTop: '1px solid rgba(255,255,255,0.05)',
+          borderTop: '1px solid var(--border-color)',
         }}>
           {step > 1 ? (
             <button
               onClick={back}
               style={{
                 display: 'flex', alignItems: 'center', gap: '0.4rem',
-                background: 'transparent', border: '1px solid rgba(255,255,255,0.15)',
-                color: '#94a3b8', padding: '0.65rem 1.2rem', borderRadius: '8px',
+                background: 'transparent', border: '1px solid var(--border-color)',
+                color: 'var(--text-secondary)', padding: '0.65rem 1.2rem', borderRadius: '8px',
                 cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600',
               }}
             >
@@ -410,13 +410,13 @@ export default function Onboarding({ onComplete }) {
             disabled={!isValid()}
             style={{
               display: 'flex', alignItems: 'center', gap: '0.5rem',
-              background: isValid() ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'rgba(255,255,255,0.05)',
-              color: isValid() ? '#fff' : '#475569',
+              background: isValid() ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'var(--border-color)',
+              color: isValid() ? '#fff' : 'var(--text-muted)',
               border: 'none', padding: '0.75rem 1.5rem', borderRadius: '10px',
               cursor: isValid() ? 'pointer' : 'not-allowed',
               fontWeight: '700', fontSize: '0.9rem',
               transition: 'all 0.2s',
-              boxShadow: isValid() ? '0 4px 15px rgba(14, 165, 233, 0.3)' : 'none',
+              boxShadow: isValid() ? '0 4px 15px rgba(14, 165, 233, 0.15)' : 'none',
             }}
           >
             {step === 3 ? '✨ Show My Scholarships' : 'Continue'}

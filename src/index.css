@@ -5,9 +5,9 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* HSL Color System */
-  --primary-h: 243;
-  --primary-s: 75%;
-  --primary-l: 59%;
+  --primary-h: 217;
+  --primary-s: 85%;
+  --primary-l: 56%;
   
   --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
   --primary-light: hsl(var(--primary-h), var(--primary-s), 96%);
@@ -21,9 +21,9 @@
   --secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
   --secondary-light: hsl(var(--secondary-h), var(--secondary-s), 95%);
   
-  --accent-h: 243;
-  --accent-s: 75%;
-  --accent-l: 59%;
+  --accent-h: 217;
+  --accent-s: 85%;
+  --accent-l: 56%;
   --accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
   --accent-light: hsl(var(--accent-h), var(--accent-s), 96%);
   --accent-dark: hsl(var(--accent-h), var(--accent-s), 35%);
@@ -638,11 +638,11 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
   border: none;
   font-weight: 700;
-  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.25);
+  box-shadow: 0 8px 24px var(--primary-glow);
   transition: var(--transition);
   animation: welcomeBtnPulse 2.5s infinite;
 }
@@ -3238,7 +3238,7 @@ body.ecolite-mode .scholarship-card {
 .card-progress-section-clean { margin-bottom: 8px; }
 .progress-text-row-clean { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
 .progress-bar-container-clean { height: 6px; background: var(--border-color); border-radius: 9999px; overflow: hidden; }
-.progress-bar-fill-clean { height: 100%; background: linear-gradient(90deg, var(--primary), #818cf8); border-radius: 9999px; transition: width 0.4s ease; }
+.progress-bar-fill-clean { height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); border-radius: 9999px; transition: width 0.4s ease; }
 .card-meta-clean { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .card-deadline-clean { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; }
 .card-deadline-clean.urgent { color: var(--error); font-weight: 600; }
