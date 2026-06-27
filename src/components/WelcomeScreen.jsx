@@ -1,25 +1,25 @@
 import React from 'react';
-import { GraduationCap, Award, ClipboardList, BookOpen, MessageSquare, Sparkles, ArrowRight } from 'lucide-react';
+import { GraduationCap, Award, ClipboardList, BookOpen, MessageSquare, ArrowRight } from 'lucide-react';
 
 export default function WelcomeScreen({ onStart }) {
   const highlights = [
     {
-      icon: <Award size={24} className="welcome-feature-icon" style={{ color: '#0ea5e9' }} />,
+      icon: <Award size={24} className="welcome-feature-icon" style={{ color: 'var(--primary)' }} />,
       title: "Smart Matching",
       desc: "Get matched to scholarships based on your academic score, category caste, domicile state, and family income."
     },
     {
-      icon: <ClipboardList size={24} className="welcome-feature-icon" style={{ color: '#0284c7' }} />,
+      icon: <ClipboardList size={24} className="welcome-feature-icon" style={{ color: 'var(--primary)' }} />,
       title: "Task-by-Task Tracker",
       desc: "Never miss a deadline. Break down applications into a checklist of documents, essays, and references."
     },
     {
-      icon: <BookOpen size={24} className="welcome-feature-icon" style={{ color: '#0ea5e9' }} />,
+      icon: <BookOpen size={24} className="welcome-feature-icon" style={{ color: 'var(--primary)' }} />,
       title: "Plain-English Glossary",
       desc: "No more confusing administrative jargon. Understand terms like Bonafide Stamps and Tehsildar Certificates instantly."
     },
     {
-      icon: <MessageSquare size={24} className="welcome-feature-icon" style={{ color: '#0369a1' }} />,
+      icon: <MessageSquare size={24} className="welcome-feature-icon" style={{ color: 'var(--primary)' }} />,
       title: "Mentor Advisor",
       desc: "Receive guidance, request letter templates, and get your essay drafts reviewed by a college advisor."
     }
@@ -42,21 +42,7 @@ export default function WelcomeScreen({ onStart }) {
         <div className="welcome-video-overlay"></div>
       </div>
 
-      <div className="welcome-bg-container">
-        {/* Floating Light Blue Bubbles (now layered above the video) */}
-        <div className="floating-bubble bubble-1"></div>
-        <div className="floating-bubble bubble-2"></div>
-        <div className="floating-bubble bubble-3"></div>
-        <div className="floating-bubble bubble-4"></div>
 
-        {/* Rising Sparkle Particles */}
-        <div className="sparkle-particle sparkle-1"></div>
-        <div className="sparkle-particle sparkle-2"></div>
-        <div className="sparkle-particle sparkle-3"></div>
-        <div className="sparkle-particle sparkle-4"></div>
-        <div className="sparkle-particle sparkle-5"></div>
-        <div className="sparkle-particle sparkle-6"></div>
-      </div>
 
       <div className="welcome-screen-card">
         <div className="welcome-screen-header">
@@ -65,7 +51,6 @@ export default function WelcomeScreen({ onStart }) {
           </div>
           <h1 className="animate-fade-in-up">Scholar Mate</h1>
           <p className="welcome-subtitle animate-fade-in-up-delayed">
-            <Sparkles size={14} style={{ marginRight: '6px', display: 'inline', verticalAlign: 'middle' }} />
             The First-Gen College Scholar Navigator (India)
           </p>
         </div>
