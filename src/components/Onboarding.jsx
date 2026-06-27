@@ -12,15 +12,15 @@ const STATES = [
 ];
 
 const ACADEMIC_LEVELS = [
-  { id: 'class11', label: 'Class 11', emoji: '📗', desc: 'Currently in 11th Standard' },
-  { id: 'class12', label: 'Class 12', emoji: '📘', desc: 'Currently in 12th / Appeared' },
-  { id: 'diploma', label: 'Diploma / ITI', emoji: '🔧', desc: 'Polytechnic or ITI Course' },
-  { id: 'ug1', label: 'UG — 1st Year', emoji: '🎓', desc: 'B.Tech / B.Sc / B.A / B.Com etc.' },
-  { id: 'ug2', label: 'UG — 2nd Year', emoji: '🎓', desc: 'B.Tech / B.Sc / B.A / B.Com etc.' },
-  { id: 'ug3', label: 'UG — 3rd Year', emoji: '🎓', desc: 'B.Tech / B.Sc / B.A / B.Com etc.' },
-  { id: 'ug4', label: 'UG — 4th Year', emoji: '🎓', desc: 'B.Tech / B.E (4-year programs)' },
-  { id: 'pg1', label: 'PG — 1st Year', emoji: '🏅', desc: 'M.Tech / M.Sc / MBA / M.A etc.' },
-  { id: 'pg2', label: 'PG — 2nd Year', emoji: '🏅', desc: 'M.Tech / M.Sc / MBA / M.A etc.' },
+  { id: 'class11', label: 'Class 11', desc: 'Currently in 11th Standard' },
+  { id: 'class12', label: 'Class 12', desc: 'Currently in 12th / Appeared' },
+  { id: 'diploma', label: 'Diploma / ITI', desc: 'Polytechnic or ITI Course' },
+  { id: 'ug1', label: 'UG — 1st Year', desc: 'B.Tech / B.Sc / B.A / B.Com etc.' },
+  { id: 'ug2', label: 'UG — 2nd Year', desc: 'B.Tech / B.Sc / B.A / B.Com etc.' },
+  { id: 'ug3', label: 'UG — 3rd Year', desc: 'B.Tech / B.Sc / B.A / B.Com etc.' },
+  { id: 'ug4', label: 'UG — 4th Year', desc: 'B.Tech / B.E (4-year programs)' },
+  { id: 'pg1', label: 'PG — 1st Year', desc: 'M.Tech / M.Sc / MBA / M.A etc.' },
+  { id: 'pg2', label: 'PG — 2nd Year', desc: 'M.Tech / M.Sc / MBA / M.A etc.' },
 ];
 
 const INCOME_RANGES = [
@@ -110,7 +110,7 @@ export default function Onboarding({ onComplete }) {
 
         {/* Header */}
         <div style={{
-          background: 'linear-gradient(135deg, #0ea5e9, #6366f1)',
+          background: 'linear-gradient(135deg, var(--primary), var(--primary-dark))',
           padding: '1.5rem 2rem',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
@@ -145,7 +145,7 @@ export default function Onboarding({ onComplete }) {
           {step === 1 && (
             <div>
               <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
-                📚 Select your current academic level and enter your last examination marks.
+                Select your current academic level and enter your last examination marks.
               </p>
 
               {/* Academic Level Grid */}
@@ -161,8 +161,8 @@ export default function Onboarding({ onComplete }) {
                       style={{
                         padding: '0.65rem 0.75rem',
                         borderRadius: '10px',
-                        border: `1px solid ${formData.academicLevel === level.id ? '#0ea5e9' : 'rgba(255,255,255,0.08)'}`,
-                        background: formData.academicLevel === level.id ? 'rgba(14, 165, 233, 0.12)' : 'rgba(255,255,255,0.02)',
+                        border: `1px solid ${formData.academicLevel === level.id ? 'var(--primary)' : 'rgba(255,255,255,0.08)'}`,
+                        background: formData.academicLevel === level.id ? 'var(--primary-glow)' : 'rgba(255,255,255,0.02)',
                         cursor: 'pointer',
                         transition: 'all 0.2s',
                         display: 'flex',
@@ -170,15 +170,15 @@ export default function Onboarding({ onComplete }) {
                         gap: '0.5rem',
                       }}
                     >
-                      <span style={{ fontSize: '1rem' }}>{level.emoji}</span>
+
                       <div>
-                        <div style={{ color: formData.academicLevel === level.id ? '#0ea5e9' : '#e2e8f0', fontWeight: '600', fontSize: '0.8rem' }}>
+                        <div style={{ color: formData.academicLevel === level.id ? 'var(--primary)' : '#e2e8f0', fontWeight: '600', fontSize: '0.8rem' }}>
                           {level.label}
                         </div>
                         <div style={{ color: '#64748b', fontSize: '0.7rem' }}>{level.desc}</div>
                       </div>
                       {formData.academicLevel === level.id && (
-                        <Check size={14} color="#0ea5e9" style={{ marginLeft: 'auto', flexShrink: 0 }} />
+                        <Check size={14} color="var(--primary)" style={{ marginLeft: 'auto', flexShrink: 0 }} />
                       )}
                     </div>
                   ))}
@@ -203,7 +203,7 @@ export default function Onboarding({ onComplete }) {
                       width: '100%',
                       padding: '0.75rem 1rem',
                       borderRadius: '10px',
-                      border: `1px solid ${formData.score ? '#0ea5e9' : 'rgba(255,255,255,0.1)'}`,
+                      border: `1px solid ${formData.score ? 'var(--primary)' : 'rgba(255,255,255,0.1)'}`,
                       background: 'rgba(255,255,255,0.04)',
                       color: '#fff',
                       fontSize: '1rem',
@@ -223,7 +223,7 @@ export default function Onboarding({ onComplete }) {
           {step === 2 && (
             <div>
               <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
-                💰 This helps us find need-based government schemes and your reservation benefits.
+                This helps us find need-based government schemes and your reservation benefits.
               </p>
 
               {/* Income Ranges */}
@@ -299,7 +299,7 @@ export default function Onboarding({ onComplete }) {
           {step === 3 && (
             <div>
               <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '1.25rem' }}>
-                🗺️ State-specific DBT schemes and gender-based scholarships like Pragati, Saksham, and Vigyan Jyoti will be matched.
+                State-specific DBT schemes and gender-based scholarships like Pragati, Saksham, and Vigyan Jyoti will be matched.
               </p>
 
               {/* State */}
@@ -314,7 +314,7 @@ export default function Onboarding({ onComplete }) {
                     width: '100%',
                     padding: '0.75rem 1rem',
                     borderRadius: '10px',
-                    border: `1px solid ${formData.state ? '#6366f1' : 'rgba(255,255,255,0.1)'}`,
+                    border: `1px solid ${formData.state ? 'var(--primary)' : 'rgba(255,255,255,0.1)'}`,
                     background: 'rgba(15,23,42,0.8)',
                     color: '#e2e8f0',
                     fontSize: '0.9rem',
@@ -341,17 +341,17 @@ export default function Onboarding({ onComplete }) {
                       style={{
                         padding: '0.75rem',
                         borderRadius: '10px',
-                        border: `1px solid ${formData.gender === g ? '#6366f1' : 'rgba(255,255,255,0.08)'}`,
-                        background: formData.gender === g ? 'rgba(99, 102, 241, 0.12)' : 'rgba(255,255,255,0.02)',
+                        border: `1px solid ${formData.gender === g ? 'var(--primary)' : 'rgba(255,255,255,0.08)'}`,
+                        background: formData.gender === g ? 'var(--primary-glow)' : 'rgba(255,255,255,0.02)',
                         cursor: 'pointer',
                         textAlign: 'center',
-                        color: formData.gender === g ? '#818cf8' : '#94a3b8',
+                        color: formData.gender === g ? 'var(--primary)' : '#94a3b8',
                         fontWeight: '600',
                         fontSize: '0.85rem',
                         transition: 'all 0.2s',
                       }}
                     >
-                      {g === 'Female' ? '👩 ' : g === 'Male' ? '👨 ' : '🧑 '}{g}
+                      {g}
                     </div>
                   ))}
                 </div>
@@ -410,7 +410,7 @@ export default function Onboarding({ onComplete }) {
             disabled={!isValid()}
             style={{
               display: 'flex', alignItems: 'center', gap: '0.5rem',
-              background: isValid() ? 'linear-gradient(135deg, #0ea5e9, #6366f1)' : 'rgba(255,255,255,0.05)',
+              background: isValid() ? 'linear-gradient(135deg, var(--primary), var(--primary-dark))' : 'rgba(255,255,255,0.05)',
               color: isValid() ? '#fff' : '#475569',
               border: 'none', padding: '0.75rem 1.5rem', borderRadius: '10px',
               cursor: isValid() ? 'pointer' : 'not-allowed',

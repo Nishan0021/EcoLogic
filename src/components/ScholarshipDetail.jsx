@@ -64,7 +64,8 @@ export default function ScholarshipDetail({
   const progressPercent = totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0;
 
   return (
-    <div className="drawer-backdrop" onClick={onClose}>
+    <>
+      <div className="drawer-backdrop" onClick={onClose}>
       <div className="drawer-container" onClick={(e) => e.stopPropagation()}>
         
         <div className="drawer-header">
@@ -389,7 +390,7 @@ export default function ScholarshipDetail({
           {activeTab === 'essay' && (
             <div className="essay-builder-container">
               <div className="essay-prompt-box">
-                <strong>📝 Personal Statement Prompt:</strong>
+                <strong>Personal Statement Prompt:</strong>
                 <p style={{ marginTop: '6px', fontWeight: '500' }}>{scholarship.essayPrompt}</p>
               </div>
 
@@ -412,7 +413,7 @@ export default function ScholarshipDetail({
               </div>
 
               <div className="firstgen-explainer" style={{ marginTop: '0', background: 'linear-gradient(135deg, #fef3c7, #fef08a)', borderColor: 'var(--warning)', color: 'var(--warning-dark)' }}>
-                <strong>💡 Get Advisor Feedback!</strong>
+                <strong>Get Advisor Feedback!</strong>
                 Copy your draft and send it to your advisor in the <strong>Mentor Chat</strong> tab. Sarah will read it and suggest changes!
               </div>
             </div>
@@ -448,19 +449,18 @@ export default function ScholarshipDetail({
             textAlign: 'center',
             boxShadow: 'var(--shadow-lg)'
           }}>
-            <div style={{
-              background: 'rgba(14, 165, 233, 0.1)',
-              color: 'var(--primary)',
-              width: '64px',
-              height: '64px',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.5rem',
-              fontSize: '2rem'
-            }}>
-              🔌
+              <div style={{
+                background: 'var(--primary-glow)',
+                color: 'var(--primary)',
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 1.5rem',
+              }}>
+                <Info size={28} />
             </div>
             <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 0.5rem 0' }}>
               Portal Opened in New Tab!
@@ -507,6 +507,6 @@ export default function ScholarshipDetail({
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
