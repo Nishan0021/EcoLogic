@@ -44,7 +44,7 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
   const [voiceSupported, setVoiceSupported] = useState(false);
 
   // 3. AI Predictor States
-  const [selectedScholarship, setSelectedScholarship] = useState('nsp_merit');
+  const [selectedScholarship, setSelectedScholarship] = useState('perfect_match');
   const [isPredicting, setIsPredicting] = useState(false);
   const [predictionResults, setPredictionResults] = useState(null);
 
@@ -144,8 +144,28 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
     setTimeout(() => {
       let score = 0;
       let breakdown = [];
+      let summary = "";
       
-      if (selectedScholarship === 'nsp_merit') {
+      if (selectedScholarship === 'perfect_match') {
+        score = 100;
+        breakdown = [
+          { label: "Academic Excellence (GPA 9.5+ or 95% above)", value: "Perfect academic qualification match (+40% weight)", positive: true },
+          { label: "First-Generation Scholar status verified via locker", value: "Preference multiplier applied successfully (+20% weight)", positive: true },
+          { label: "Annual family income under lowest threshold (< ₹1.5 Lakhs)", value: "Maximum need-based eligibility multiplier (+30% weight)", positive: true },
+          { label: "All mandatory verification documents uploaded & OCR verified", value: "Zero documentation audit risk detected (+10% weight)", positive: true }
+        ];
+        summary = "Perfect Match! You meet every criteria and have submitted all verified documents. Your chances of approval are exceptionally high.";
+      } else if (selectedScholarship === 'partial_match') {
+        score = 55;
+        breakdown = [
+          { label: "Academic scores meet the bare minimum requirements", value: "Low GPA weight contribution (+25% weight)", positive: true },
+          { label: "Annual income is close to the upper threshold limit", value: "Reduced financial need multiplier (+15% weight)", positive: true },
+          { label: "First-Generation Scholar verification pending", value: "Missing priority bonus points (0% weight)", positive: false },
+          { label: "Missing Caste/Category certificate slot in locker", value: "Documentation check failure warning (-15% risk penalty)", positive: false },
+          { label: "Missing income certificate OCR signature validation", value: "Audit check compliance warning (-15% risk penalty)", positive: false }
+        ];
+        summary = "Moderate Match. Your profile meets the base parameters, but missing priority documents and low score weight reduce your odds of winning.";
+      } else if (selectedScholarship === 'nsp_merit') {
         score = 88;
         breakdown = [
           { label: "Academic Qualification (9.2 CGPA)", value: "+45% score weight", positive: true },
@@ -153,6 +173,7 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
           { label: "Income Limit (under ₹2,50,000)", value: "+25% weight multiplier", positive: true },
           { label: "Missing Document: Domicile Certificate", value: "-10% risk multiplier", positive: false }
         ];
+        summary = "Strong Match! Minor verification steps remain (e.g. upload Domicile Certificate) to achieve maximum winning probability.";
       } else if (selectedScholarship === 'sitaram_jindal') {
         score = 92;
         breakdown = [
@@ -160,6 +181,7 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
           { label: "Income Certificate verified via OCR", value: "+40% weight", positive: true },
           { label: "Marksheet OCR Verification Match", value: "+22% weight", positive: true }
         ];
+        summary = "Excellent Match! All key documents match OCR checks and course alignment is verified.";
       } else {
         score = 65;
         breakdown = [
@@ -167,9 +189,10 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
           { label: "Income verified under threshold", value: "+30% weight", positive: true },
           { label: "Requires Letter of Recommendation (Missing)", value: "-15% risk weight", positive: false }
         ];
+        summary = "Moderate Match. To improve your odds, draft and upload the required Letter of Recommendation in the Document Vault.";
       }
 
-      setPredictionResults({ score, breakdown });
+      setPredictionResults({ score, breakdown, summary });
       setIsPredicting(false);
     }, 1800);
   };
@@ -374,6 +397,8 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
               <div>
                 <label style={{ display: 'block', fontSize: '0.9rem', color: '#ddd', marginBottom: '0.5rem' }}>Select Target Scholarship:</label>
                 <select value={selectedScholarship} onChange={(e) => { setSelectedScholarship(e.target.value); setPredictionResults(null); }} style={{ width: '100%', padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.3)', color: '#fff' }}>
+                  <option value="perfect_match">100% Match Case (Perfect Profile)</option>
+                  <option value="partial_match">55% Match Case (Partial Profile)</option>
                   <option value="nsp_merit">National Merit-cum-Means Scholarship</option>
                   <option value="sitaram_jindal">Sitaram Jindal Foundation Grant</option>
                   <option value="post_matric">State Post-Matric DBT Scholarship</option>
@@ -399,7 +424,7 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
                     <span style={{ fontSize: '1.8rem', fontWeight: 'bold', color: predictionResults.score >= 80 ? '#2ed573' : '#ffaa00' }}>{predictionResults.score}%</span>
                   </div>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '0.75rem' }}>
                     {predictionResults.breakdown.map((item, index) => (
                       <div key={index} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', padding: '0.4rem', borderRadius: '6px', background: item.positive ? 'rgba(46, 213, 115, 0.05)' : 'rgba(255, 107, 107, 0.05)' }}>
                         <span style={{ color: '#ccc' }}>{item.label}</span>
@@ -407,6 +432,13 @@ export default function EcoLabs({ documents = [], language, setLanguage, setActi
                       </div>
                     ))}
                   </div>
+
+                  {predictionResults.summary && (
+                    <div style={{ padding: '0.75rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)', fontSize: '0.85rem', lineHeight: '1.4', color: '#bbb' }}>
+                      <strong style={{ color: '#2ed573', display: 'block', marginBottom: '4px' }}>💡 AI Analysis & Recommendations:</strong>
+                      {predictionResults.summary}
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div style={{ color: '#555', fontSize: '0.85rem', textAlign: 'center' }}>

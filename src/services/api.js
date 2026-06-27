@@ -188,6 +188,14 @@ export const api = {
     return res.json();
   },
 
+  async getScholarships() {
+    const remote = await tryFetch('/scholarships');
+    if (remote && Array.isArray(remote)) {
+      return remote;
+    }
+    return null;
+  },
+
   async getApplications(studentId) {
     // Try backend
     const remote = await tryFetch('/applications');
